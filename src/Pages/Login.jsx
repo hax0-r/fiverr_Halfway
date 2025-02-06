@@ -30,7 +30,7 @@ const Login = () => {
                             <a href="sign-up.html" className="bg-teal-800 text-white no-underline p-3 rounded-xl block text-center font-semibold transition-all duration-500 hover:bg-teal-900 hover:scale-105">Create Account</a>
                         </form>
                     </div>
-                    <div className="flex-1 bg-cover flex flex-col justify-center items-center text-center md:p-8 py-8 p-4">
+                    <div className="flex-1 md:border-l-2 border-teal-800 bg-cover flex flex-col justify-center items-center text-center md:p-8 py-8 p-4">
                         <h2 className="md:text-4xl text-3xl text-teal-800 font-bold">MEET ME HALFWAY</h2>
                         <div className="max-w-3xl mx-auto overflow-hidden md:whitespace-nowrap">
                             <p className="text-lg text-teal-800 inline-block overflow-hidden mt-5 md:border-r-2 border-teal-800 animate-typing">Welcome to <strong>Meet Me Halfway</strong>, your web app for finding the perfect midpoint!</p>
