@@ -13,7 +13,7 @@ const Navbar = () => {
             <div className="bg-white p-4 border-b border-gray-200">
                 <div className="flex items-center max-w-7xl w-full mx-auto justify-between">
                     <img src={logo} alt="Logo" className="md:h-12 h-10" />
-                    <div className="text-3xl font-semibold text-zinc-700">MEET ME HALFWAY</div>
+                    <div className="text-3xl font-semibold text-zinc-700 sm:block hidden">MEET ME HALFWAY</div>
                     <div className="flex items-center gap-7">
                         <Link to={"/history"}>
                             <FaUser className='text-xl text-zinc-700 cursor-pointer' />
