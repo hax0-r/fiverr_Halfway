@@ -7,6 +7,8 @@ import { FaLocationDot } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
 import { FaBus, FaCar, FaWalking } from 'react-icons/fa'
 import { RiMotorbikeFill } from 'react-icons/ri'
+import { auth, db } from '../Components/Firebase';
+import { setDoc, doc } from 'firebase/firestore';
 
 const center = { lat: 48.8584, lng: 2.3584 } // Default Paris location
 
@@ -25,28 +27,45 @@ const Map = () => {
 
     const calculateRoute = async () => {
         if (!originRef.current || !destinationRef.current) return;
-
+    
+        const user = auth.currentUser;
+        if (!user) {
+            toast.error("Please log in to save search history.");
+            return;
+        }
+    
         const originPlace = originRef.current.getPlace();
         const destinationPlace = destinationRef.current.getPlace();
-
+    
         if (!originPlace || !destinationPlace) {
             toast.error("Please select a location from the suggestions.");
             return;
         }
-
-        const directionsService = new google.maps.DirectionsService();
-
+    
+        const originName = originPlace.name;
+        const destinationName = destinationPlace.name;
+    
         try {
+            // Store user history in Firebase
+            await setDoc(doc(db, 'user_history', `${user.uid}_${Date.now()}`), {
+                userId: user.uid,
+                origin: originName,
+                destination: destinationName,
+                timestamp: new Date().toISOString(),
+            });
+    
+            // Calculate route
+            const directionsService = new google.maps.DirectionsService();
             const results = await directionsService.route({
                 origin: originPlace.geometry.location,
                 destination: destinationPlace.geometry.location,
                 travelMode: google.maps.TravelMode.DRIVING
             });
-
+    
             if (!results || results.status !== "OK") {
                 throw new Error("Route not found");
             }
-
+    
             setDirectionResponse(results);
             setDistance(results.routes[0].legs[0].distance.text);
             setDuration(results.routes[0].legs[0].duration.text);
@@ -57,6 +76,7 @@ const Map = () => {
             setDuration("");
         }
     };
+    
 
     // Handle Search Functionality in the Bottom Input
     const handleSearch = () => {
