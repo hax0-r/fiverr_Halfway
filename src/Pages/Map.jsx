@@ -167,13 +167,6 @@ const Map = () => {
                                 <p>Distance: <span className='font-medium text-green-600'>{distance}</span> </p>
                                 <p className='mt-2'>Duration: <span className='font-medium text-green-600'>{duration}</span></p>
                             </div>
-
-                            <div className="flex items-center gap-5 justify-center mt-7">
-                                <FaCar className='text-2xl cursor-pointer' />
-                                <FaBus className='text-2xl cursor-pointer' />
-                                <RiMotorbikeFill className='text-2xl cursor-pointer' />
-                                <FaWalking className='text-2xl cursor-pointer' />
-                            </div>
                         </>
                     )}
 
