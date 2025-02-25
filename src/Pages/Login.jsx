@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMailOutline } from 'react-icons/io5';
 import { MdLockOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,13 @@ import { auth } from '../Components/Firebase';
 
 const Login = () => {
     const navigate = useNavigate();
-
+    
+    useEffect(() => {
+        if (localStorage.getItem("Login")) {
+            navigate("/map"); // Redirect if already logged in
+        }
+    }, []);
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
